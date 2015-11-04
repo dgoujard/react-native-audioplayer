@@ -6,6 +6,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -24,19 +25,43 @@ public class RNAudioPlayerModule extends ReactContextBaseJavaModule {
     return "RNAudioPlayer";
   }
 
+  private void sendEvent(
+          String eventName
+  ) {
+    this.reactContext
+            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+            .emit(eventName,null);
+  }
+
   @ReactMethod
   public void play(String audio) {
     String fname = audio.toLowerCase();
     int resID = this.reactContext.getResources().getIdentifier(fname, "raw", this.reactContext.getPackageName());
     mp = MediaPlayer.create(this.reactContext, resID);
     mp.start();
-    mp.setOnCompletionListener(new OnCompletionListener() {
-      @Override
-      public void onCompletion(MediaPlayer mp) {
-        mp.reset();
-        mp.release();
-        mp = null;
-      }
-    });
+
+
+  mp.setOnCompletionListener(new OnCompletionListener() {
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+    sendEvent("AudioPlayerDidFinishPlaying");
+
+    mp.reset();
+    mp.release();
+    mp = null;
+    }
+  });
+  }
+
+  @ReactMethod
+  public void pause() {
+    mp.pause();
+
+  }
+
+  @ReactMethod
+  public void resume() {
+    mp.start();
+
   }
 }

@@ -52,8 +52,7 @@ RCT_EXPORT_METHOD(stop)
 
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    NSLog(@"Fin audio");
-    [self.bridge.eventDispatcher sendAppEventWithName:@"AudioPlayerDidFinishPlaying" body:@{@"name": @"fin"}];
+    [self.bridge.eventDispatcher sendAppEventWithName:@"AudioPlayerDidFinishPlaying" body:nil];
 }
 
 @end
