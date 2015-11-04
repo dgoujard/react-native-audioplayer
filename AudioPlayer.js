@@ -1,13 +1,20 @@
 'use strict';
 
-var { RNAudioPlayer } = require('react-native').NativeModules;
-var { Platform } = require('react-native');
+var RNAudioPlayer = require('react-native').NativeModules.RNAudioPlayer;
+var NativeAppEventEmitter = require('react-native').NativeAppEventEmitter;
 
-var AudioPlayer = {
+module.exports = class AudioPlayer {
   play(fileName: string) {
-    fileName = Platform.OS === 'ios' ? fileName : fileName.replace(/\.[^/.]+$/, "");
     RNAudioPlayer.play(fileName);
   }
-};
 
-module.exports = AudioPlayer;
+  pause() {
+    RNAudioPlayer.pause();
+  }
+  resume() {
+    RNAudioPlayer.resume();
+  }
+  stop() {
+    RNAudioPlayer.stop();
+  }
+};
