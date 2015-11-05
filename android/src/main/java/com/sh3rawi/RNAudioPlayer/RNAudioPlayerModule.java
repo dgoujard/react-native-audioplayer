@@ -55,13 +55,15 @@ public class RNAudioPlayerModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void pause() {
-    mp.pause();
+    if(mp != null)
+      mp.pause();
 
   }
 
   @ReactMethod
   public void resume() {
-    mp.start();
+    if(mp != null)
+      mp.start();
 
   }
 }
