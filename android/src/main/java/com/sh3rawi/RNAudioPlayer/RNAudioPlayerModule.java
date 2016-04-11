@@ -35,6 +35,8 @@ public class RNAudioPlayerModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void play(String audio) {
+    RNAudioPlayerSingleton singleton = RNAudioPlayerSingleton.getInstance();
+    singleton.resetIfNeedAudio();
     String fname = audio.toLowerCase();
     int resID = this.reactContext.getResources().getIdentifier(fname, "raw", this.reactContext.getPackageName());
     mp = MediaPlayer.create(this.reactContext, resID);
@@ -51,6 +53,8 @@ public class RNAudioPlayerModule extends ReactContextBaseJavaModule {
     mp = null;
     }
   });
+
+  singleton.setAudioPlayer(mp);
   }
 
   @ReactMethod
