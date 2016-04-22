@@ -18,11 +18,17 @@ public class RNAudioPlayerSingleton {
    }
 
    public void resetIfNeedAudio(){
-      if(mp != null){
-        mp.stop();
-        mp.reset();
-        mp = null;
-      }
+       try {
+           if(mp != null){
+               if(mp.isPlaying())
+                 mp.stop();
+                 mp.reset();
+                 mp.release();
+              mp = null;
+           }
+       } catch (Exception e) {
+           mp = null;
+        }
    }
    public void setAudioPlayer(MediaPlayer mp){
      this.mp = mp;
