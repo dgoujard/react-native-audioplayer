@@ -1,6 +1,4 @@
 #import "RNAudioPlayer.h"
-#import "RCTBridge.h"
-#import "RCTEventDispatcher.h"
 
 @implementation RNAudioPlayer
 
