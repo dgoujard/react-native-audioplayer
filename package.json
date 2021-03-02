@@ -18,5 +18,12 @@
     "audioplayer"
   ],
   "author": "Andreas Keller <andreas.keller@gmx.ch> (https://github.com/andreaskeller)",
-  "license": "MIT"
+  "license": "MIT",
+  "files": [
+    "android",
+    "apple",
+    "lib",
+    "AudioPlayer.js",
+    "react-native-audioplayer.podspec"
+  ]
 }
