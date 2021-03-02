@@ -12,10 +12,14 @@ npm install react-native-audioplayer --save
 
 ### Installation (iOS)
 
-In XCode, in the project navigator, right click Libraries ➜ Add Files to [your project's name] ➜ Go to node_modules ➜ react-native-audioplayer and add the .xcodeproj file
-
-In XCode, in the project navigator, select your project. Add the lib*.a from the audioplayer project to your project's Build Phases ➜ Link Binary With Libraries. Then, click on the .xcodeproj file you added before in the project navigator, and go the Build Settings tab. Make sure 'All' is toggled on (instead of 'Basic'). Look for Header Search Paths and make sure it contains both $(SRCROOT)/../react-native/React and $(SRCROOT)/../../React - mark both as recursive.
-
+Edit ios/Podspec and add
+```
+pod 'react-native-audioplayer', :path => '../node_modules/react-native-audioplayer'
+```
+run
+```
+cd ios &&  pod install --repo-update
+```
 ### Installation (Android)
 
 * In `android/settings.gradle`
